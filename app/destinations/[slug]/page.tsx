@@ -59,11 +59,13 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
           />
           <div className="destination-hero-overlay" />
           <div className="container destination-hero-content">
-            <Link className="destination-back" href="/#destinations">
-              <ArrowLeft size={17} aria-hidden="true" />
-              Toutes les destinations
-            </Link>
-            <p className="section-label">{destination.region}</p>
+            <div className="destination-hero-meta">
+              <Link className="destination-back" href="/#destinations">
+                <ArrowLeft size={17} aria-hidden="true" />
+                Toutes les destinations
+              </Link>
+              <p className="section-label">{destination.region}</p>
+            </div>
             <h1>{destination.title}</h1>
             <p>{destination.summary}</p>
           </div>
