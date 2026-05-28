@@ -6,7 +6,7 @@ export function Footer() {
     <footer id="contact" className="footer">
       <div className="container footer-layout">
         <div>
-          <a className="brand footer-brand" href="#accueil">
+          <a className="brand footer-brand" href="/#accueil">
             <span>Mada</span>Voyage
           </a>
           <p>
@@ -27,11 +27,11 @@ export function Footer() {
         </div>
         <div>
           <h2>Liens utiles</h2>
-          <a href="#accueil">Accueil</a>
-          <a href="#destinations">Destinations</a>
-          <a href="#circuits">Circuits</a>
-          <a href="#apropos">A propos</a>
-          <a href="#contact">Contact</a>
+          <a href="/#accueil">Accueil</a>
+          <a href="/#destinations">Destinations</a>
+          <a href="/#circuits">Circuits</a>
+          <a href="/#apropos">A propos</a>
+          <a href="/#contact">Contact</a>
         </div>
         <div>
           <h2>Informations</h2>

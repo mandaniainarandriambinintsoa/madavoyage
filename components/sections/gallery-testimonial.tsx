@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import { galleryItems, testimonials } from "@/data/travel";
+import { destinations } from "@/data/destinations";
+import { testimonials } from "@/data/travel";
 
 export function GalleryTestimonial() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -32,11 +34,11 @@ export function GalleryTestimonial() {
           <p className="section-label">Les incontournables</p>
           <h2>Madagascar en un coup d'oeil</h2>
           <div className="gallery-grid">
-            {galleryItems.map((item) => (
-              <figure className="gallery-card" data-reveal key={item.title}>
+            {destinations.map((item) => (
+              <Link className="gallery-card" data-reveal href={`/destinations/${item.slug}`} key={item.title}>
                 <Image src={item.image} alt={item.title} fill sizes="(min-width: 900px) 25vw, 50vw" />
-                <figcaption>{item.title}</figcaption>
-              </figure>
+                <span>{item.title}</span>
+              </Link>
             ))}
           </div>
         </div>
