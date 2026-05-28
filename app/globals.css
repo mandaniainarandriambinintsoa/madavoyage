@@ -1760,6 +1760,31 @@ h1 {
   flex: 0 0 auto;
 }
 
+.booking-status {
+  border-radius: 8px;
+  margin: 0;
+  padding: 13px 15px;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.booking-status.success {
+  background: #edf8ef;
+  color: #1f6b32;
+}
+
+.booking-status.error {
+  background: #fff0ec;
+  color: #9f2f1f;
+}
+
+.booking-card .btn:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+}
+
 @media (max-width: 900px) {
   .booking-steps,
   .circuit-choice-grid,

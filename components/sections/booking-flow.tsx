@@ -1,10 +1,11 @@
 "use client";
 
 import { CalendarDays, CheckCircle2, Mail, Plane, UserRound, UsersRound } from "lucide-react";
-import { useMemo, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import { bookingDepartures, circuits } from "@/data/travel";
 
 type BookingMode = "scheduled" | "custom";
+type SubmitState = "idle" | "loading" | "success" | "error";
 
 export function BookingFlow() {
   const [selectedCircuit, setSelectedCircuit] = useState(circuits[0].title);
@@ -16,9 +17,11 @@ export function BookingFlow() {
   const [selectedDepartureId, setSelectedDepartureId] = useState(availableDepartures[0]?.id ?? "");
   const [travelers, setTravelers] = useState("2");
   const [customDate, setCustomDate] = useState("");
-  const [flexibility, setFlexibility] = useState("± 3 jours");
+  const [flexibility, setFlexibility] = useState("+/- 3 jours");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [feedback, setFeedback] = useState("");
 
   const selectedDeparture =
     availableDepartures.find((departure) => departure.id === selectedDepartureId) ?? availableDepartures[0];
@@ -36,6 +39,52 @@ export function BookingFlow() {
       : customDate
         ? `${customDate} (${flexibility})`
         : "Date a proposer";
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitState("loading");
+    setFeedback("");
+
+    try {
+      const response = await fetch("/api/reservation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          circuit: selectedCircuitData.title,
+          price: selectedCircuitData.price,
+          mode,
+          travelers,
+          name,
+          email,
+          customDate,
+          flexibility,
+          selectedDeparture:
+            mode === "scheduled" && selectedDeparture
+              ? {
+                  id: selectedDeparture.id,
+                  label: `${selectedDeparture.date} - ${selectedDeparture.returnDate}`,
+                  isoDate: selectedDeparture.isoDate,
+                  returnIsoDate: selectedDeparture.returnIsoDate,
+                  price: selectedDeparture.price,
+                  placesLeft: selectedDeparture.placesLeft,
+                  style: selectedDeparture.style
+                }
+              : null
+        })
+      });
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "La demande n'a pas pu etre envoyee.");
+      }
+
+      setSubmitState("success");
+      setFeedback(`Demande envoyee. Reference ${data.reservationId}. Un email de confirmation vient de partir.`);
+    } catch (error) {
+      setSubmitState("error");
+      setFeedback(error instanceof Error ? error.message : "Une erreur est survenue.");
+    }
+  };
 
   return (
     <aside id="reservation" className="booking-card" data-reveal aria-label="Reservation de circuit">
@@ -55,7 +104,7 @@ export function BookingFlow() {
         <span>4. Recap</span>
       </div>
 
-      <form className="booking-flow">
+      <form className="booking-flow" onSubmit={handleSubmit}>
         <fieldset>
           <legend>Choisir un circuit</legend>
           <div className="circuit-choice-grid">
@@ -113,7 +162,7 @@ export function BookingFlow() {
                   <span>{departure.returnDate}</span>
                   <strong>{departure.price}</strong>
                   <small>
-                    {departure.placesLeft} places restantes · {departure.style}
+                    {departure.placesLeft} places restantes - {departure.style}
                   </small>
                   <em>{departure.note}</em>
                 </button>
@@ -129,8 +178,8 @@ export function BookingFlow() {
                 Flexibilite
                 <select value={flexibility} onChange={(event) => setFlexibility(event.target.value)}>
                   <option>Dates fixes</option>
-                  <option>± 3 jours</option>
-                  <option>± 7 jours</option>
+                  <option>+/- 3 jours</option>
+                  <option>+/- 7 jours</option>
                   <option>Mois flexible</option>
                 </select>
               </label>
@@ -160,6 +209,7 @@ export function BookingFlow() {
                 autoComplete="name"
                 onChange={(event) => setName(event.target.value)}
                 placeholder="Votre nom"
+                required
                 value={name}
               />
             </label>
@@ -169,6 +219,7 @@ export function BookingFlow() {
                 autoComplete="email"
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder="vous@email.com"
+                required
                 type="email"
                 value={email}
               />
@@ -207,8 +258,10 @@ export function BookingFlow() {
           </ul>
         </div>
 
-        <button className="btn primary" type="button">
-          Envoyer la demande
+        {feedback ? <p className={`booking-status ${submitState}`}>{feedback}</p> : null}
+
+        <button className="btn primary" disabled={submitState === "loading"} type="submit">
+          {submitState === "loading" ? "Envoi en cours..." : "Envoyer la demande"}
         </button>
       </form>
 
