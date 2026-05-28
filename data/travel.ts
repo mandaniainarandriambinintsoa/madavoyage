@@ -58,6 +58,75 @@ export const departures = [
   }
 ];
 
+export const bookingDepartures = [
+  {
+    id: "baobabs-june-2026",
+    circuitTitle: "La route des baobabs",
+    date: "12 juin 2026",
+    isoDate: "2026-06-12",
+    returnDate: "19 juin 2026",
+    placesLeft: 6,
+    style: "Petit groupe",
+    price: "1 280 EUR",
+    note: "Ideal photo & paysages"
+  },
+  {
+    id: "baobabs-october-2026",
+    circuitTitle: "La route des baobabs",
+    date: "18 octobre 2026",
+    isoDate: "2026-10-18",
+    returnDate: "25 octobre 2026",
+    placesLeft: 8,
+    style: "Premium local",
+    price: "1 360 EUR",
+    note: "Couchers de soleil"
+  },
+  {
+    id: "wildlife-august-2026",
+    circuitTitle: "Nature & faune endemique",
+    date: "24 aout 2026",
+    isoDate: "2026-08-24",
+    returnDate: "2 septembre 2026",
+    placesLeft: 4,
+    style: "Confort",
+    price: "1 590 EUR",
+    note: "Faune & parcs nationaux"
+  },
+  {
+    id: "wildlife-september-2026",
+    circuitTitle: "Nature & faune endemique",
+    date: "14 septembre 2026",
+    isoDate: "2026-09-14",
+    returnDate: "23 septembre 2026",
+    placesLeft: 5,
+    style: "Petit groupe",
+    price: "1 640 EUR",
+    note: "Forets tropicales"
+  },
+  {
+    id: "complete-july-2026",
+    circuitTitle: "Madagascar complet",
+    date: "6 juillet 2026",
+    isoDate: "2026-07-06",
+    returnDate: "20 juillet 2026",
+    placesLeft: 5,
+    style: "Confort",
+    price: "2 350 EUR",
+    note: "Grand itineraire"
+  },
+  {
+    id: "complete-november-2026",
+    circuitTitle: "Madagascar complet",
+    date: "9 novembre 2026",
+    isoDate: "2026-11-09",
+    returnDate: "23 novembre 2026",
+    placesLeft: 7,
+    style: "Premium local",
+    price: "2 480 EUR",
+    note: "Centre, sud & plages"
+  }
+];
+
 export const trustItems = [
   "Guides locaux certifies",
   "Paiement securise",

@@ -1528,6 +1528,253 @@ h1 {
   margin-bottom: 36px;
 }
 
+/* Booking flow */
+.booking-card-header {
+  text-align: center;
+}
+
+.booking-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(47, 93, 58, 0.18);
+  border-radius: 999px;
+  background: #f8fbf5;
+  color: var(--color-primary);
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.booking-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 28px 0;
+}
+
+.booking-steps span {
+  border-radius: 999px;
+  background: var(--color-sand);
+  color: #405149;
+  padding: 9px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.booking-card .booking-flow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  margin: 0 0 28px;
+}
+
+.booking-flow fieldset {
+  min-width: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  margin: 0;
+  padding: 18px;
+}
+
+.booking-flow legend {
+  color: var(--color-primary-dark);
+  font-size: 15px;
+  font-weight: 800;
+  padding: 0 8px;
+}
+
+.circuit-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.choice-card,
+.departure-option,
+.booking-tabs button {
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-text);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.choice-card {
+  display: grid;
+  gap: 7px;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.choice-card span {
+  color: var(--color-gold);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.choice-card strong {
+  color: var(--color-primary-dark);
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.choice-card small {
+  color: var(--color-muted);
+  font-weight: 700;
+}
+
+.choice-card:hover,
+.departure-option:hover {
+  transform: translateY(-2px);
+}
+
+.choice-card.active,
+.departure-option.active,
+.booking-tabs button.active {
+  border-color: rgba(47, 93, 58, 0.55);
+  background: #f8fbf5;
+  box-shadow: 0 12px 34px rgba(23, 59, 40, 0.08);
+}
+
+.booking-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.booking-tabs button {
+  border-radius: 999px;
+  padding: 11px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.departure-choice-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.departure-option {
+  display: grid;
+  gap: 7px;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.departure-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary-dark);
+  font-weight: 900;
+}
+
+.departure-option strong {
+  color: var(--color-primary);
+  font-size: 20px;
+}
+
+.departure-option small {
+  color: var(--color-muted);
+  font-weight: 700;
+}
+
+.departure-option em {
+  color: #405149;
+  font-size: 13px;
+  font-style: normal;
+}
+
+.custom-date-grid,
+.traveler-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  align-items: end;
+}
+
+.custom-date-grid p {
+  grid-column: 1 / -1;
+  margin: 0;
+  border-left: 3px solid var(--color-gold);
+  background: #fffdf8;
+  padding: 12px 14px;
+  font-size: 14px;
+}
+
+.booking-summary {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 18px;
+  border-radius: 8px;
+  background: #10271b;
+  color: rgba(255, 255, 255, 0.82);
+  padding: 20px;
+}
+
+.booking-summary span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-gold);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.booking-summary strong {
+  color: var(--color-white);
+  font-size: 22px;
+  line-height: 1.18;
+}
+
+.booking-summary ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.booking-summary li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+}
+
+.booking-summary svg {
+  color: var(--color-gold);
+  flex: 0 0 auto;
+}
+
+@media (max-width: 900px) {
+  .booking-steps,
+  .circuit-choice-grid,
+  .departure-choice-list,
+  .custom-date-grid,
+  .traveler-grid,
+  .booking-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-steps {
+    gap: 6px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

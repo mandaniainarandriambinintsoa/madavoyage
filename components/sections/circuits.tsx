@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ArrowRight, CalendarDays, MapPin, ShieldCheck, UsersRound } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
+import { BookingFlow } from "@/components/sections/booking-flow";
 import { circuits } from "@/data/travel";
 
 export function Circuits() {
@@ -56,53 +57,7 @@ export function Circuits() {
           ))}
         </div>
         </div>
-        <aside id="reservation" className="booking-card" data-reveal aria-label="Reservation de circuit">
-          <h2>Reservez votre circuit</h2>
-          <p>Choisissez vos dates et reservez votre aventure en toute simplicite.</p>
-          <form>
-            <label>
-              Choisir un circuit
-              <select defaultValue="">
-                <option value="" disabled>
-                  Selectionner un circuit
-                </option>
-                {circuits.map((circuit) => (
-                  <option key={circuit.title}>{circuit.title}</option>
-                ))}
-              </select>
-            </label>
-            <label>
-              Date de depart
-              <input type="date" />
-            </label>
-            <label>
-              Nombre de voyageurs
-              <select defaultValue="2 voyageurs">
-                <option>1 voyageur</option>
-                <option>2 voyageurs</option>
-                <option>3 voyageurs</option>
-                <option>4 voyageurs et plus</option>
-              </select>
-            </label>
-            <button className="btn primary" type="button">
-              Verifier les disponibilites
-            </button>
-          </form>
-          <div className="booking-proof">
-            <span>
-              <CalendarDays size={18} aria-hidden="true" />
-              Confirmation rapide
-            </span>
-            <span>
-              <ShieldCheck size={18} aria-hidden="true" />
-              Paiement securise
-            </span>
-            <span>
-              <UsersRound size={18} aria-hidden="true" />
-              Accompagnement personnalise
-            </span>
-          </div>
-        </aside>
+        <BookingFlow />
       </div>
     </section>
   );
