@@ -105,13 +105,13 @@ img {
 
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% + 18px);
+  top: 100%;
   left: 50%;
   width: 290px;
   border: 1px solid rgba(23, 59, 40, 0.1);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.98);
-  padding: 8px;
+  padding: 18px 8px 8px;
   box-shadow: 0 24px 70px rgba(23, 59, 40, 0.16);
   opacity: 0;
   pointer-events: none;
@@ -1300,27 +1300,47 @@ h1 {
 }
 
 .destination-place-card {
+  overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: 8px;
   background: var(--color-white);
-  padding: 22px;
   box-shadow: 0 18px 54px rgba(23, 59, 40, 0.08);
 }
 
-.destination-place-card span {
+.destination-place-image {
+  position: relative;
+  aspect-ratio: 1.38;
+  overflow: hidden;
+  background: #edf4ee;
+}
+
+.destination-place-image img {
+  object-fit: cover;
+  transition: transform 420ms ease;
+}
+
+.destination-place-card:hover .destination-place-image img {
+  transform: scale(1.045);
+}
+
+.destination-place-body {
+  padding: 22px;
+}
+
+.destination-place-body span {
   color: var(--color-gold);
   font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;
 }
 
-.destination-place-card h3 {
+.destination-place-body h3 {
   margin: 10px 0;
   color: var(--color-primary-dark);
   font-size: 24px;
 }
 
-.destination-place-card p {
+.destination-place-body p {
   margin-bottom: 0;
   color: var(--color-muted);
   line-height: 1.65;
@@ -1639,7 +1659,7 @@ h1 {
   text-shadow: 0 1px 14px rgba(0, 0, 0, 0.24);
 }
 
-.site-header .main-nav a:first-child::after {
+.site-header .main-nav > a:first-child::after {
   position: absolute;
   right: 0;
   bottom: -9px;

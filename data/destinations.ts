@@ -13,18 +13,22 @@ export const destinations = [
     places: [
       {
         name: "Rova d'Antananarivo",
+        image: "/images/madavoyage/place-rova-antananarivo.webp",
         description: "Ancien palais royal dominant la Haute-Ville, ideal pour comprendre l'histoire merina."
       },
       {
         name: "Colline royale d'Ambohimanga",
+        image: "/images/madavoyage/place-ambohimanga.webp",
         description: "Site historique majeur aux portes de la capitale, classe au patrimoine mondial de l'UNESCO."
       },
       {
         name: "Marche d'Analakely",
+        image: "/images/madavoyage/place-analakely.webp",
         description: "Quartier vivant pour sentir le rythme quotidien de la capitale et ses commerces populaires."
       },
       {
         name: "Lac Anosy",
+        image: "/images/madavoyage/place-lac-anosy.webp",
         description: "Repere urbain reconnaissable, avec ses jacarandas et son monument central."
       }
     ],
@@ -45,14 +49,17 @@ export const destinations = [
     places: [
       {
         name: "Grands Tsingy",
+        image: "/images/madavoyage/hero-madagascar.webp",
         description: "Parcours aventure avec belvederes, passerelles et reliefs calcaires impressionnants."
       },
       {
         name: "Petits Tsingy",
+        image: "/images/madavoyage/hero-madagascar.webp",
         description: "Version plus accessible pour une premiere approche des formations rocheuses."
       },
       {
         name: "Manambolo",
+        image: "/images/madavoyage/hero-madagascar.webp",
         description: "Descente ou balade en pirogue dans les gorges selon l'itineraire choisi."
       }
     ],
@@ -73,14 +80,17 @@ export const destinations = [
     places: [
       {
         name: "Allee principale",
+        image: "/images/madavoyage/circuit-baobabs.webp",
         description: "Le panorama classique, ideal pour les photos de fin de jour."
       },
       {
         name: "Baobab amoureux",
+        image: "/images/madavoyage/circuit-baobabs.webp",
         description: "Deux troncs entrelaces, souvent integres aux circuits dans la region."
       },
       {
         name: "Morondava",
+        image: "/images/madavoyage/circuit-baobabs.webp",
         description: "Ville de depart pratique pour explorer l'ouest et ses paysages secs."
       }
     ],
@@ -101,14 +111,17 @@ export const destinations = [
     places: [
       {
         name: "Nosy Be",
+        image: "/images/madavoyage/circuit-lagoon.webp",
         description: "Ile connue pour ses plages, sorties en mer et ambiance tropicale."
       },
       {
         name: "Sainte-Marie",
+        image: "/images/madavoyage/circuit-lagoon.webp",
         description: "Destination plus douce, appreciee pour son charme et ses paysages marins."
       },
       {
         name: "Lagons du nord",
+        image: "/images/madavoyage/circuit-lagoon.webp",
         description: "Eaux calmes, ilots et pauses balneaires selon le circuit."
       }
     ],
@@ -129,14 +142,17 @@ export const destinations = [
     places: [
       {
         name: "Andasibe-Mantadia",
+        image: "/images/madavoyage/circuit-wildlife.webp",
         description: "Reserve celebre pour l'indri-indri et les ambiances de foret humide."
       },
       {
         name: "Ranomafana",
+        image: "/images/madavoyage/circuit-wildlife.webp",
         description: "Parc tropical riche en especes, souvent integre aux circuits nature."
       },
       {
         name: "Sorties nocturnes",
+        image: "/images/madavoyage/circuit-wildlife.webp",
         description: "Observation encadree de petites especes et de cameleons selon les zones."
       }
     ],

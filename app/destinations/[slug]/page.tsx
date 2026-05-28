@@ -109,9 +109,14 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
             <div className="destination-place-grid">
               {destination.places.map((place) => (
                 <article className="destination-place-card" key={place.name}>
-                  <span>{destination.region}</span>
-                  <h3>{place.name}</h3>
-                  <p>{place.description}</p>
+                  <div className="destination-place-image">
+                    <Image src={place.image} alt={place.name} fill sizes="(min-width: 1024px) 30vw, 100vw" />
+                  </div>
+                  <div className="destination-place-body">
+                    <span>{destination.region}</span>
+                    <h3>{place.name}</h3>
+                    <p>{place.description}</p>
+                  </div>
                 </article>
               ))}
             </div>
