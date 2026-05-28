@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "MadaVoyage",
-  url: "https://madavoyage.example",
+  url: "https://madavoyage.vercel.app",
   locale: "fr_FR",
   title: "MadaVoyage - Circuits accompagnes a Madagascar",
   description:
