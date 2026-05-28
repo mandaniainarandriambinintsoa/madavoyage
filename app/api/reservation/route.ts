@@ -35,6 +35,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: false, message: "Invalid email." }, { status: 400 });
   }
 
+  const travelers = Number.parseInt(String(body.travelers), 10);
+  if (!Number.isFinite(travelers) || travelers < 1 || travelers > 40) {
+    return NextResponse.json({ success: false, message: "Invalid travelers count." }, { status: 400 });
+  }
+
   if (body.mode === "custom" && !String(body.customDate ?? "").trim()) {
     return NextResponse.json({ success: false, message: "Missing custom date." }, { status: 400 });
   }

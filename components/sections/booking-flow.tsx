@@ -1,11 +1,12 @@
 "use client";
 
-import { CalendarDays, CheckCircle2, Mail, Plane, UserRound, UsersRound, X } from "lucide-react";
-import { FormEvent, useMemo, useState } from "react";
+import { CalendarDays, CheckCircle2, Mail, UserRound, UsersRound, X } from "lucide-react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { bookingDepartures, circuits } from "@/data/travel";
 
 type BookingMode = "scheduled" | "custom";
 type SubmitState = "idle" | "loading" | "success" | "error";
+type Availability = Record<string, { placesLeft: number }>;
 
 export function BookingFlow() {
   const [selectedCircuit, setSelectedCircuit] = useState(circuits[0].title);
@@ -16,6 +17,7 @@ export function BookingFlow() {
   );
   const [selectedDepartureId, setSelectedDepartureId] = useState(availableDepartures[0]?.id ?? "");
   const [travelers, setTravelers] = useState("2");
+  const [availability, setAvailability] = useState<Availability>({});
   const [customDate, setCustomDate] = useState("");
   const [flexibility, setFlexibility] = useState("+/- 3 jours");
   const [name, setName] = useState("");
@@ -27,6 +29,33 @@ export function BookingFlow() {
   const selectedDeparture =
     availableDepartures.find((departure) => departure.id === selectedDepartureId) ?? availableDepartures[0];
   const selectedCircuitData = circuits.find((circuit) => circuit.title === selectedCircuit) ?? circuits[0];
+  const requestedSeats = Number.parseInt(travelers, 10) || 0;
+  const selectedPlacesLeft =
+    selectedDeparture && availability[selectedDeparture.id]
+      ? availability[selectedDeparture.id].placesLeft
+      : selectedDeparture?.placesLeft ?? 0;
+  const isOverCapacity = mode === "scheduled" && selectedDeparture && requestedSeats > selectedPlacesLeft;
+
+  useEffect(() => {
+    let mounted = true;
+
+    fetch("/api/availability", { cache: "no-store" })
+      .then((response) => response.json())
+      .then((data) => {
+        if (mounted && data.success && data.inventory) {
+          setAvailability(data.inventory);
+        }
+      })
+      .catch(() => {
+        if (mounted) {
+          setAvailability({});
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const selectCircuit = (title: string) => {
     const nextDeparture = bookingDepartures.find((departure) => departure.circuitTitle === title);
@@ -44,6 +73,14 @@ export function BookingFlow() {
   const sendReservation = async () => {
     setSubmitState("loading");
     setFeedback("");
+
+    if (isOverCapacity) {
+      setSubmitState("error");
+      setFeedback(
+        `Il reste seulement ${selectedPlacesLeft} place(s) sur ce depart. Choisissez une date personnalisee ou reduisez le nombre de voyageurs.`
+      );
+      return;
+    }
     setShowConfirm(false);
 
     try {
@@ -67,7 +104,7 @@ export function BookingFlow() {
                   isoDate: selectedDeparture.isoDate,
                   returnIsoDate: selectedDeparture.returnIsoDate,
                   price: selectedDeparture.price,
-                  placesLeft: selectedDeparture.placesLeft,
+                  placesLeft: selectedPlacesLeft,
                   style: selectedDeparture.style
                 }
               : null
@@ -81,6 +118,12 @@ export function BookingFlow() {
 
       setSubmitState("success");
       setFeedback(`Demande envoyee. Reference ${data.reservationId}. Un email de confirmation vient de partir.`);
+      if (mode === "scheduled" && selectedDeparture && typeof data.remainingPlaces === "number") {
+        setAvailability((current) => ({
+          ...current,
+          [selectedDeparture.id]: { placesLeft: data.remainingPlaces }
+        }));
+      }
     } catch (error) {
       setSubmitState("error");
       setFeedback(error instanceof Error ? error.message : "Une erreur est survenue.");
@@ -90,16 +133,19 @@ export function BookingFlow() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFeedback("");
+    if (isOverCapacity) {
+      setSubmitState("error");
+      setFeedback(
+        `Il reste seulement ${selectedPlacesLeft} place(s) sur ce depart. Choisissez une date personnalisee ou reduisez le nombre de voyageurs.`
+      );
+      return;
+    }
     setShowConfirm(true);
   };
 
   return (
     <aside id="reservation" className="booking-card" data-reveal aria-label="Reservation de circuit">
       <div className="booking-card-header">
-        <span className="booking-chip">
-          <Plane size={16} aria-hidden="true" />
-          Mode billet
-        </span>
         <h2>Reservez votre circuit</h2>
         <p>Choisissez un depart pret a partir, ou demandez une date privee a confirmer.</p>
       </div>
@@ -169,7 +215,8 @@ export function BookingFlow() {
                   <span>{departure.returnDate}</span>
                   <strong>{departure.price}</strong>
                   <small>
-                    {departure.placesLeft} places restantes - {departure.style}
+                    {availability[departure.id]?.placesLeft ?? departure.placesLeft} places restantes -{" "}
+                    {departure.style}
                   </small>
                   <em>{departure.note}</em>
                 </button>
@@ -203,12 +250,14 @@ export function BookingFlow() {
           <div className="traveler-grid">
             <label>
               Voyageurs
-              <select value={travelers} onChange={(event) => setTravelers(event.target.value)}>
-                <option value="1">1 voyageur</option>
-                <option value="2">2 voyageurs</option>
-                <option value="3">3 voyageurs</option>
-                <option value="4+">4 voyageurs et plus</option>
-              </select>
+              <input
+                min="1"
+                max="40"
+                onChange={(event) => setTravelers(event.target.value)}
+                required
+                type="number"
+                value={travelers}
+              />
             </label>
             <label>
               Nom
@@ -266,8 +315,14 @@ export function BookingFlow() {
         </div>
 
         {feedback ? <p className={`booking-status ${submitState}`}>{feedback}</p> : null}
+        {isOverCapacity ? (
+          <p className="booking-status error">
+            Ce depart ne peut pas accueillir {requestedSeats} voyageurs. Il reste {selectedPlacesLeft} place(s).
+            Choisissez une date personnalisee pour une demande groupe.
+          </p>
+        ) : null}
 
-        <button className="btn primary" disabled={submitState === "loading"} type="submit">
+        <button className="btn primary" disabled={submitState === "loading" || Boolean(isOverCapacity)} type="submit">
           {submitState === "loading" ? "Envoi en cours..." : "Envoyer la demande"}
         </button>
       </form>
@@ -304,6 +359,12 @@ export function BookingFlow() {
               <strong>{tripDate}</strong>
               <span>Voyageurs</span>
               <strong>{travelers}</strong>
+              {mode === "scheduled" && selectedDeparture ? (
+                <>
+                  <span>Places restantes apres confirmation</span>
+                  <strong>{Math.max(0, selectedPlacesLeft - requestedSeats)}</strong>
+                </>
+              ) : null}
               <span>Nom</span>
               <strong>{name}</strong>
               <span>Email</span>
