@@ -49,17 +49,17 @@ export const destinations = [
     places: [
       {
         name: "Grands Tsingy",
-        image: "/images/madavoyage/hero-madagascar.webp",
+        image: "/images/madavoyage/place-grand-tsingy.webp",
         description: "Parcours aventure avec belvederes, passerelles et reliefs calcaires impressionnants."
       },
       {
         name: "Petits Tsingy",
-        image: "/images/madavoyage/hero-madagascar.webp",
+        image: "/images/madavoyage/place-petit-tsingy.webp",
         description: "Version plus accessible pour une premiere approche des formations rocheuses."
       },
       {
         name: "Manambolo",
-        image: "/images/madavoyage/hero-madagascar.webp",
+        image: "/images/madavoyage/place-manambolo.webp",
         description: "Descente ou balade en pirogue dans les gorges selon l'itineraire choisi."
       }
     ],
@@ -80,17 +80,17 @@ export const destinations = [
     places: [
       {
         name: "Allee principale",
-        image: "/images/madavoyage/circuit-baobabs.webp",
+        image: "/images/madavoyage/place-allee-baobabs.webp",
         description: "Le panorama classique, ideal pour les photos de fin de jour."
       },
       {
         name: "Baobab amoureux",
-        image: "/images/madavoyage/circuit-baobabs.webp",
+        image: "/images/madavoyage/place-baobab-amoureux.webp",
         description: "Deux troncs entrelaces, souvent integres aux circuits dans la region."
       },
       {
         name: "Morondava",
-        image: "/images/madavoyage/circuit-baobabs.webp",
+        image: "/images/madavoyage/place-morondava.webp",
         description: "Ville de depart pratique pour explorer l'ouest et ses paysages secs."
       }
     ],
@@ -111,17 +111,17 @@ export const destinations = [
     places: [
       {
         name: "Nosy Be",
-        image: "/images/madavoyage/circuit-lagoon.webp",
+        image: "/images/madavoyage/place-nosy-be.webp",
         description: "Ile connue pour ses plages, sorties en mer et ambiance tropicale."
       },
       {
         name: "Sainte-Marie",
-        image: "/images/madavoyage/circuit-lagoon.webp",
+        image: "/images/madavoyage/place-sainte-marie.webp",
         description: "Destination plus douce, appreciee pour son charme et ses paysages marins."
       },
       {
         name: "Lagons du nord",
-        image: "/images/madavoyage/circuit-lagoon.webp",
+        image: "/images/madavoyage/place-lagons-nord.webp",
         description: "Eaux calmes, ilots et pauses balneaires selon le circuit."
       }
     ],
@@ -142,17 +142,17 @@ export const destinations = [
     places: [
       {
         name: "Andasibe-Mantadia",
-        image: "/images/madavoyage/circuit-wildlife.webp",
+        image: "/images/madavoyage/place-andasibe.webp",
         description: "Reserve celebre pour l'indri-indri et les ambiances de foret humide."
       },
       {
         name: "Ranomafana",
-        image: "/images/madavoyage/circuit-wildlife.webp",
+        image: "/images/madavoyage/place-ranomafana.webp",
         description: "Parc tropical riche en especes, souvent integre aux circuits nature."
       },
       {
         name: "Sorties nocturnes",
-        image: "/images/madavoyage/circuit-wildlife.webp",
+        image: "/images/madavoyage/place-sortie-nocturne.webp",
         description: "Observation encadree de petites especes et de cameleons selon les zones."
       }
     ],
