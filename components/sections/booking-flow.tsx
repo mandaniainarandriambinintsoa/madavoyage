@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarDays, CheckCircle2, Mail, Plane, UserRound, UsersRound } from "lucide-react";
+import { CalendarDays, CheckCircle2, Mail, Plane, UserRound, UsersRound, X } from "lucide-react";
 import { FormEvent, useMemo, useState } from "react";
 import { bookingDepartures, circuits } from "@/data/travel";
 
@@ -22,6 +22,7 @@ export function BookingFlow() {
   const [email, setEmail] = useState("");
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [feedback, setFeedback] = useState("");
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const selectedDeparture =
     availableDepartures.find((departure) => departure.id === selectedDepartureId) ?? availableDepartures[0];
@@ -40,10 +41,10 @@ export function BookingFlow() {
         ? `${customDate} (${flexibility})`
         : "Date a proposer";
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const sendReservation = async () => {
     setSubmitState("loading");
     setFeedback("");
+    setShowConfirm(false);
 
     try {
       const response = await fetch("/api/reservation", {
@@ -84,6 +85,12 @@ export function BookingFlow() {
       setSubmitState("error");
       setFeedback(error instanceof Error ? error.message : "Une erreur est survenue.");
     }
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFeedback("");
+    setShowConfirm(true);
   };
 
   return (
@@ -264,6 +271,55 @@ export function BookingFlow() {
           {submitState === "loading" ? "Envoi en cours..." : "Envoyer la demande"}
         </button>
       </form>
+
+      {showConfirm ? (
+        <div className="booking-modal-backdrop" role="presentation">
+          <div
+            aria-labelledby="booking-confirm-title"
+            aria-modal="true"
+            className="booking-modal"
+            role="dialog"
+          >
+            <button
+              aria-label="Fermer la confirmation"
+              className="booking-modal-close"
+              onClick={() => setShowConfirm(false)}
+              type="button"
+            >
+              <X size={18} aria-hidden="true" />
+            </button>
+            <span className="booking-chip">
+              <CheckCircle2 size={16} aria-hidden="true" />
+              Verification
+            </span>
+            <h3 id="booking-confirm-title">Confirmer votre demande ?</h3>
+            <p>
+              Verifiez les informations avant l'envoi. Apres confirmation, la demande sera transmise a
+              MadaVoyage et un email partira automatiquement.
+            </p>
+            <div className="booking-modal-summary">
+              <span>Circuit</span>
+              <strong>{selectedCircuitData.title}</strong>
+              <span>Depart</span>
+              <strong>{tripDate}</strong>
+              <span>Voyageurs</span>
+              <strong>{travelers}</strong>
+              <span>Nom</span>
+              <strong>{name}</strong>
+              <span>Email</span>
+              <strong>{email}</strong>
+            </div>
+            <div className="booking-modal-actions">
+              <button className="btn secondary dark" onClick={() => setShowConfirm(false)} type="button">
+                Modifier
+              </button>
+              <button className="btn primary" onClick={sendReservation} type="button">
+                Confirmer l'envoi
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       <div className="booking-proof">
         <span>

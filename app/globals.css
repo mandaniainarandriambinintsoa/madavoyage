@@ -1785,13 +1785,92 @@ h1 {
   transform: none;
 }
 
+.booking-modal-backdrop {
+  position: fixed;
+  z-index: 60;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(16, 39, 27, 0.52);
+  padding: 20px;
+}
+
+.booking-modal {
+  position: relative;
+  width: min(560px, 100%);
+  border-radius: 8px;
+  background: var(--color-white);
+  padding: 28px;
+  box-shadow: 0 34px 110px rgba(16, 39, 27, 0.32);
+}
+
+.booking-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-white);
+  color: var(--color-primary-dark);
+  cursor: pointer;
+}
+
+.booking-modal h3 {
+  margin-bottom: 10px;
+  color: var(--color-primary-dark);
+  font-size: 31px;
+}
+
+.booking-modal p {
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.booking-modal-summary {
+  display: grid;
+  grid-template-columns: 0.6fr 1.4fr;
+  gap: 10px 16px;
+  border-radius: 8px;
+  background: #fffdf8;
+  margin: 18px 0 22px;
+  padding: 16px;
+}
+
+.booking-modal-summary span {
+  color: var(--color-muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.booking-modal-summary strong {
+  color: var(--color-primary-dark);
+}
+
+.booking-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn.secondary.dark {
+  border-color: var(--color-border);
+  background: var(--color-white);
+  color: var(--color-text);
+}
+
 @media (max-width: 900px) {
   .booking-steps,
   .circuit-choice-grid,
   .departure-choice-list,
   .custom-date-grid,
   .traveler-grid,
-  .booking-summary {
+  .booking-summary,
+  .booking-modal-summary {
     grid-template-columns: 1fr;
   }
 
