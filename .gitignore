@@ -14,3 +14,5 @@ render-check*.json
 # Design references not needed in repo/deploy
 assets/
 public/images/madavoyage/generation_*.png
+
+.vercel
