@@ -7,7 +7,7 @@ export function Circuits() {
     <section id="circuits" className="section circuits-booking-section">
       <div className="container circuits-booking-layout">
         <div className="circuits-content">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <p className="section-label">Nos circuits accompagnes</p>
           <h2>Partez a la decouverte de Madagascar</h2>
           <p>
@@ -16,8 +16,13 @@ export function Circuits() {
           </p>
         </div>
         <div className="card-grid">
-          {circuits.map((circuit) => (
-            <article className="circuit-card" key={circuit.title}>
+          {circuits.map((circuit, index) => (
+            <article
+              className="circuit-card"
+              data-reveal
+              data-reveal-delay={index * 90}
+              key={circuit.title}
+            >
               <div className="card-image">
                 <Image
                   src={circuit.image}
@@ -51,7 +56,7 @@ export function Circuits() {
           ))}
         </div>
         </div>
-        <aside id="reservation" className="booking-card" aria-label="Reservation de circuit">
+        <aside id="reservation" className="booking-card" data-reveal aria-label="Reservation de circuit">
           <h2>Reservez votre circuit</h2>
           <p>Choisissez vos dates et reservez votre aventure en toute simplicite.</p>
           <form>

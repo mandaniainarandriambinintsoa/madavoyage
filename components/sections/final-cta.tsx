@@ -11,7 +11,7 @@ export function FinalCta() {
         sizes="100vw"
       />
       <div className="final-cta-overlay" />
-      <div className="container final-cta-content">
+      <div className="container final-cta-content" data-reveal>
         <h2>Pret a vivre l'aventure Malgache ?</h2>
         <a className="btn primary" href="#reservation">
           Demander un devis

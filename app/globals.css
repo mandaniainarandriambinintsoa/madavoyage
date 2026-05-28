@@ -38,6 +38,23 @@ img {
   object-fit: cover;
 }
 
+[data-reveal] {
+  will-change: opacity, transform;
+}
+
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 620ms ease,
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .container {
   width: min(var(--container), calc(100% - 40px));
   margin: 0 auto;
@@ -183,6 +200,24 @@ h1 {
 .btn.primary {
   background: var(--color-primary);
   color: var(--color-white);
+}
+
+.btn,
+.nav-cta,
+.card-footer a,
+.newsletter-form button {
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.btn:hover,
+.nav-cta:hover,
+.newsletter-form button:hover {
+  transform: translateY(-2px);
 }
 
 .btn.secondary {
@@ -692,6 +727,8 @@ h1 {
 
 .hero-image {
   object-position: center;
+  transform: scale(1.02);
+  animation: heroImageSettle 1200ms ease both;
 }
 
 .hero-overlay {
@@ -713,6 +750,44 @@ h1 {
   font-size: clamp(76px, 8vw, 112px);
   font-weight: 400;
   line-height: 0.92;
+}
+
+.hero-animate {
+  animation: heroContentRise 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-kicker.hero-animate {
+  animation-delay: 90ms;
+}
+
+.hero-copy.hero-animate {
+  animation-delay: 180ms;
+}
+
+.hero-actions.hero-animate {
+  animation-delay: 270ms;
+}
+
+@keyframes heroContentRise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroImageSettle {
+  from {
+    transform: scale(1.06);
+  }
+
+  to {
+    transform: scale(1.02);
+  }
 }
 
 .hero-kicker {
@@ -773,6 +848,27 @@ h1 {
 .circuits-booking-section .circuit-card {
   overflow: hidden;
   box-shadow: 0 18px 60px rgba(23, 59, 40, 0.1);
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.circuits-booking-section .circuit-card:hover {
+  border-color: rgba(47, 93, 58, 0.28);
+  box-shadow: 0 24px 74px rgba(23, 59, 40, 0.16);
+  transform: translateY(-5px);
+}
+
+.card-image img,
+.gallery-card img,
+.final-cta img {
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.circuit-card:hover .card-image img,
+.gallery-card:hover img {
+  transform: scale(1.05);
 }
 
 .circuits-booking-section .card-image {
@@ -924,6 +1020,14 @@ h1 {
 }
 
 .why-item svg {
+  transition: transform 220ms ease;
+}
+
+.why-item:hover svg {
+  transform: translateY(-4px);
+}
+
+.why-item svg {
   margin-bottom: 16px;
   color: var(--color-primary);
 }
@@ -974,6 +1078,14 @@ h1 {
   border-radius: 8px;
   margin: 0;
   box-shadow: 0 16px 44px rgba(23, 59, 40, 0.1);
+  transition:
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.gallery-card:hover {
+  box-shadow: 0 22px 60px rgba(23, 59, 40, 0.16);
+  transform: translateY(-4px);
 }
 
 .gallery-card::after {
@@ -1086,6 +1198,10 @@ h1 {
 
 .final-cta img {
   object-position: center 82%;
+}
+
+.final-cta:hover img {
+  transform: scale(1.04);
 }
 
 .final-cta-overlay {
@@ -1410,4 +1526,24 @@ h1 {
 
 .why-section .section-label.center {
   margin-bottom: 36px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+
+  .reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
 }

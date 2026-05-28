@@ -28,19 +28,19 @@ export function GalleryTestimonial() {
   return (
     <section id="destinations" className="section gallery-section">
       <div className="container gallery-layout">
-        <div>
+        <div data-reveal>
           <p className="section-label">Les incontournables</p>
           <h2>Madagascar en un coup d'oeil</h2>
           <div className="gallery-grid">
             {galleryItems.map((item) => (
-              <figure className="gallery-card" key={item.title}>
+              <figure className="gallery-card" data-reveal key={item.title}>
                 <Image src={item.image} alt={item.title} fill sizes="(min-width: 900px) 25vw, 50vw" />
                 <figcaption>{item.title}</figcaption>
               </figure>
             ))}
           </div>
         </div>
-        <aside className="testimonial-card">
+        <aside className="testimonial-card" data-reveal>
           <p className="section-label">Ils nous ont fait confiance</p>
           <div className="testimonial-slide" key={activeTestimonial.quote}>
             <blockquote>"{activeTestimonial.quote}"</blockquote>
