@@ -1,0 +1,14 @@
+.git
+.next
+node_modules
+out
+dist
+.env
+.env.local
+*.tsbuildinfo
+
+screenshots-*.png
+render-check*.json
+MEMORY.md
+assets/
+public/images/madavoyage/generation_*.png

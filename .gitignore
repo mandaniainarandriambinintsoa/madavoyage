@@ -1,0 +1,16 @@
+.next
+node_modules
+out
+dist
+.env
+.env.local
+*.tsbuildinfo
+
+# Local render/debug artifacts
+MEMORY.md
+screenshots-*.png
+render-check*.json
+
+# Design references not needed in repo/deploy
+assets/
+public/images/madavoyage/generation_*.png
