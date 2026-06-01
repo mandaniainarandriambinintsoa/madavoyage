@@ -12,6 +12,7 @@
   --container: 1180px;
   --radius-card: 8px;
   --shadow-soft: 0 24px 80px rgba(23, 59, 40, 0.12);
+  --motion-hover: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
@@ -263,17 +264,17 @@ h1 {
 .card-footer a,
 .newsletter-form button {
   transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
+    background-color 280ms ease,
+    border-color 280ms ease,
+    box-shadow 320ms var(--motion-hover),
+    color 280ms ease,
+    transform 320ms var(--motion-hover);
 }
 
 .btn:hover,
 .nav-cta:hover,
 .newsletter-form button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .btn.secondary {
@@ -907,26 +908,26 @@ h1 {
   overflow: hidden;
   box-shadow: 0 18px 60px rgba(23, 59, 40, 0.1);
   transition:
-    border-color 220ms ease,
-    box-shadow 220ms ease,
-    transform 220ms ease;
+    border-color 320ms ease,
+    box-shadow 420ms var(--motion-hover),
+    transform 420ms var(--motion-hover);
 }
 
 .circuits-booking-section .circuit-card:hover {
-  border-color: rgba(47, 93, 58, 0.28);
-  box-shadow: 0 24px 74px rgba(23, 59, 40, 0.16);
-  transform: translateY(-5px);
+  border-color: rgba(47, 93, 58, 0.22);
+  box-shadow: 0 22px 68px rgba(23, 59, 40, 0.13);
+  transform: translateY(-2px);
 }
 
 .card-image img,
 .gallery-card img,
 .final-cta img {
-  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 1100ms var(--motion-hover);
 }
 
 .circuit-card:hover .card-image img,
 .gallery-card:hover img {
-  transform: scale(1.05);
+  transform: scale(1.025);
 }
 
 .circuits-booking-section .card-image {
@@ -1078,11 +1079,11 @@ h1 {
 }
 
 .why-item svg {
-  transition: transform 220ms ease;
+  transition: transform 380ms var(--motion-hover);
 }
 
 .why-item:hover svg {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }
 
 .why-item svg {
@@ -1138,13 +1139,13 @@ h1 {
   margin: 0;
   box-shadow: 0 16px 44px rgba(23, 59, 40, 0.1);
   transition:
-    box-shadow 220ms ease,
-    transform 220ms ease;
+    box-shadow 420ms var(--motion-hover),
+    transform 420ms var(--motion-hover);
 }
 
 .gallery-card:hover {
-  box-shadow: 0 22px 60px rgba(23, 59, 40, 0.16);
-  transform: translateY(-4px);
+  box-shadow: 0 20px 54px rgba(23, 59, 40, 0.13);
+  transform: translateY(-2px);
 }
 
 .gallery-card::after {
@@ -1327,11 +1328,11 @@ h1 {
 
 .destination-place-image img {
   object-fit: cover;
-  transition: transform 420ms ease;
+  transition: transform 760ms var(--motion-hover);
 }
 
 .destination-place-card:hover .destination-place-image img {
-  transform: scale(1.045);
+  transform: scale(1.025);
 }
 
 .destination-place-body {
@@ -1411,7 +1412,9 @@ h1 {
   background: var(--color-white);
   color: var(--color-primary);
   cursor: pointer;
-  transition: border-color 160ms ease, transform 160ms ease;
+  transition:
+    border-color 240ms ease,
+    transform 280ms var(--motion-hover);
 }
 
 .testimonial-controls button:hover {
@@ -1452,7 +1455,7 @@ h1 {
 }
 
 .final-cta:hover img {
-  transform: scale(1.04);
+  transform: scale(1.025);
 }
 
 .final-cta-overlay {
@@ -1863,9 +1866,9 @@ h1 {
   font: inherit;
   text-align: left;
   transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+    border-color 260ms ease,
+    box-shadow 320ms var(--motion-hover),
+    transform 320ms var(--motion-hover);
 }
 
 .choice-card {
@@ -1895,7 +1898,7 @@ h1 {
 
 .choice-card:hover,
 .departure-option:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .choice-card.active,
