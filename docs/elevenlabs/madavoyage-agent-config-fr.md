@@ -26,8 +26,8 @@ agent_5201ktyjbsebe6arhvg4g9jmsfb4
 
 L'agent a maintenant :
 
-- voix configuree cote ElevenLabs : `cgSgspJ2msm6clMCkdW9`
-  (`Jessica - Playful, Bright, Warm`) ;
+- voix configuree cote ElevenLabs : `iFBdB4I143qF5ByX6o5A`
+  (`Nelly - French Interactive AI`) ;
 - modele TTS : `eleven_multilingual_v2`, utilise pour forcer la variante
   francaise verifiee de cette voix ;
 - LLM principal economique : `gpt-5-nano` avec `reasoning_effort`
