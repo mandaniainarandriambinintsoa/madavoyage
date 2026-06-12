@@ -26,9 +26,10 @@ agent_5201ktyjbsebe6arhvg4g9jmsfb4
 
 L'agent a maintenant :
 
+- voix configuree cote ElevenLabs : `cgSgspJ2msm6clMCkdW9` ;
 - LLM principal economique : `gpt-5-nano` avec `reasoning_effort`
   `minimal` ;
-- limite de reponse LLM : `350` tokens, temperature `0.25` ;
+- limite de reponse LLM : `260` tokens, temperature `0.20` ;
 - LLM de secours : configuration ElevenLabs par defaut ;
 - knowledge base texte attachee : `LCf78goVio9caKxSAIoE` ;
 - RAG active avec `e5_mistral_7b_instruct` ;
@@ -50,9 +51,8 @@ Langue : francais.
 Premiere phrase :
 
 ```txt
-Bonjour, je suis l'assistant vocal de MadaVoyage. Je peux vous aider a choisir
-un circuit a Madagascar, verifier un depart ou preparer une demande de
-reservation. Qu'est-ce que vous aimeriez organiser ?
+Bonjour, je suis l'assistant vocal de MadaVoyage. Vous avez deja un circuit en
+tete, ou vous voulez que je vous conseille ?
 ```
 
 Objectif :
@@ -181,6 +181,9 @@ Tests a faire apres creation de l'agent :
 Resultat attendu :
 
 - l'agent parle en francais ;
+- il ne melange pas francais et anglais sauf demande explicite ;
+- il pose une seule question a la fois ;
+- il presente un circuit ou une date, puis attend la reponse ;
 - il ne confirme jamais une place sans tool ;
 - il recapitule avant reservation ;
 - il rappelle que la demande est a confirmer par l'equipe ;
