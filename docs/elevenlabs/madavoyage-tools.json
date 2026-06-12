@@ -1,0 +1,137 @@
+{
+  "agent_name": "MadaVoyage - Assistant vocal",
+  "language": "fr",
+  "tool_auth": {
+    "header_name": "x-elevenlabs-tool-secret",
+    "env_name": "ELEVENLABS_TOOL_SECRET"
+  },
+  "tools": [
+    {
+      "name": "get_madavoyage_availability",
+      "description_fr": "Recupere les places restantes pour les departs MadaVoyage. A utiliser avant de confirmer une disponibilite.",
+      "method": "GET",
+      "url": "https://madavoyage.vercel.app/api/voice/availability",
+      "headers": {
+        "x-elevenlabs-tool-secret": "{{ELEVENLABS_TOOL_SECRET}}"
+      },
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "create_madavoyage_reservation",
+      "description_fr": "Cree une demande de reservation MadaVoyage apres recapitulatif et confirmation orale du voyageur.",
+      "method": "POST",
+      "url": "https://madavoyage.vercel.app/api/voice/reservation",
+      "headers": {
+        "Content-Type": "application/json",
+        "x-elevenlabs-tool-secret": "{{ELEVENLABS_TOOL_SECRET}}"
+      },
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "circuit": {
+            "type": "string",
+            "description": "Nom exact du circuit souhaite."
+          },
+          "mode": {
+            "type": "string",
+            "enum": ["scheduled", "custom"],
+            "description": "scheduled pour un depart planifie, custom pour une date personnalisee."
+          },
+          "travelers": {
+            "type": "string",
+            "description": "Nombre de voyageurs, entre 1 et 40."
+          },
+          "name": {
+            "type": "string",
+            "description": "Nom du voyageur principal."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email valide du voyageur."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Telephone du voyageur si disponible."
+          },
+          "customDate": {
+            "type": "string",
+            "description": "Date ou periode souhaitee si mode custom."
+          },
+          "flexibility": {
+            "type": "string",
+            "description": "Flexibilite du voyageur si mode custom."
+          },
+          "message": {
+            "type": "string",
+            "description": "Message ou besoin particulier."
+          },
+          "selectedDeparture": {
+            "type": "object",
+            "description": "Depart choisi si mode scheduled.",
+            "properties": {
+              "id": { "type": "string" },
+              "label": { "type": "string" },
+              "isoDate": { "type": "string" },
+              "returnIsoDate": { "type": "string" },
+              "price": { "type": "string" },
+              "style": { "type": "string" }
+            }
+          }
+        },
+        "required": ["circuit", "mode", "travelers", "name", "email"]
+      }
+    },
+    {
+      "name": "request_human_followup",
+      "description_fr": "Transmet une demande a l'equipe MadaVoyage quand le besoin doit etre repris par un humain.",
+      "method": "POST",
+      "url": "https://madavoyage.vercel.app/api/voice/human-followup",
+      "headers": {
+        "Content-Type": "application/json",
+        "x-elevenlabs-tool-secret": "{{ELEVENLABS_TOOL_SECRET}}"
+      },
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nom du voyageur si connu."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email si connu."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Telephone si connu."
+          },
+          "summary": {
+            "type": "string",
+            "description": "Resume court de la demande."
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["normal", "urgent"],
+            "description": "Priorite de reprise humaine."
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "custom_trip",
+              "price_negotiation",
+              "medical_accessibility",
+              "complaint",
+              "other"
+            ],
+            "description": "Raison de l'escalade."
+          }
+        },
+        "required": ["summary", "priority", "reason"]
+      }
+    }
+  ]
+}
