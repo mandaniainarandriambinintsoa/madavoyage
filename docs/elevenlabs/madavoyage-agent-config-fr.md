@@ -26,7 +26,10 @@ agent_5201ktyjbsebe6arhvg4g9jmsfb4
 
 L'agent a maintenant :
 
-- voix configuree cote ElevenLabs : `cgSgspJ2msm6clMCkdW9` ;
+- voix configuree cote ElevenLabs : `cgSgspJ2msm6clMCkdW9`
+  (`Jessica - Playful, Bright, Warm`) ;
+- modele TTS : `eleven_multilingual_v2`, utilise pour forcer la variante
+  francaise verifiee de cette voix ;
 - LLM principal economique : `gpt-5-nano` avec `reasoning_effort`
   `minimal` ;
 - limite de reponse LLM : `260` tokens, temperature `0.20` ;
@@ -135,6 +138,19 @@ Quand l'utiliser :
 - uniquement apres recapitulatif et confirmation orale ;
 - quand l'agent connait le circuit, le mode, le nombre de voyageurs, le nom et
   l'email.
+
+Flux technique :
+
+1. L'agent appelle le tool ElevenLabs `create_madavoyage_reservation`.
+2. ElevenLabs envoie un `POST` vers
+   `https://madavoyage.vercel.app/api/voice/reservation`.
+3. La route Next.js verifie le header `x-elevenlabs-tool-secret`.
+4. La route valide les champs requis : circuit, mode, voyageurs, nom, email.
+5. La route relaie la demande vers `N8N_RESERVATION_WEBHOOK_URL` avec le header
+   `x-madavoyage-secret`.
+6. n8n traite le webhook, cree la reference et envoie l'email de confirmation.
+7. La route renvoie le resultat a ElevenLabs, qui l'explique oralement au
+   voyageur.
 
 ### Tool 3 - relais humain
 
