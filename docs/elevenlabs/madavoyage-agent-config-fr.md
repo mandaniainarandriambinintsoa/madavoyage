@@ -26,7 +26,8 @@ agent_5201ktyjbsebe6arhvg4g9jmsfb4
 
 L'agent a maintenant :
 
-- LLM principal economique : `gpt-4.1-nano` ;
+- LLM principal economique : `gpt-5-nano` avec `reasoning_effort`
+  `minimal` ;
 - limite de reponse LLM : `350` tokens, temperature `0.25` ;
 - LLM de secours : configuration ElevenLabs par defaut ;
 - knowledge base texte attachee : `LCf78goVio9caKxSAIoE` ;
