@@ -15,7 +15,8 @@ Le projet local est pret pour un agent ElevenLabs :
   - `POST /api/voice/reservation`
   - `POST /api/voice/human-followup`
 
-Agent cree dans ElevenLabs le 2026-06-12 via MCP.
+Agent cree dans ElevenLabs le 2026-06-12 via MCP, puis complete via l'API
+ElevenLabs directe.
 
 ID agent :
 
@@ -23,11 +24,18 @@ ID agent :
 agent_5201ktyjbsebe6arhvg4g9jmsfb4
 ```
 
-Le MCP disponible a permis de creer l'agent avec le prompt systeme et la base
-de connaissance integree dans le prompt. Il n'expose pas encore d'appel dedie
-pour attacher une knowledge base separee ou creer les server tools HTTP
-directement dans ElevenLabs. Les schemas ci-dessous restent donc la reference a
-ajouter dans l'interface ElevenLabs si necessaire.
+L'agent a maintenant :
+
+- knowledge base texte attachee : `LCf78goVio9caKxSAIoE` ;
+- RAG active avec `e5_mistral_7b_instruct` ;
+- secret workspace ElevenLabs : `madavoyage_tool_secret` ;
+- tools server HTTP attaches :
+  - `get_madavoyage_availability` :
+    `tool_1701ktykksp2e5bvvndqkpheccy9` ;
+  - `create_madavoyage_reservation` :
+    `tool_8001ktyknfbwetgtpcyx8g1pagfn` ;
+  - `request_human_followup` :
+    `tool_6401ktykngqqerytcgt803vmjb09`.
 
 ## Agent
 
@@ -58,6 +66,7 @@ Ajouter cote Vercel / local :
 ```txt
 NEXT_PUBLIC_ELEVENLABS_AGENT_ID=agent_5201ktyjbsebe6arhvg4g9jmsfb4
 ELEVENLABS_TOOL_SECRET=secret-long-aleatoire
+ELEVENLABS_API_KEY=cle-api-elevenlabs-locale-seulement
 N8N_VOICE_FOLLOWUP_WEBHOOK_URL=https://n8n.manda-ia.com/webhook/...
 ```
 
@@ -80,9 +89,15 @@ Chaque tool doit envoyer le header :
 x-elevenlabs-tool-secret: <ELEVENLABS_TOOL_SECRET>
 ```
 
+Dans ElevenLabs, ce header reference le secret workspace
+`madavoyage_tool_secret` au lieu de stocker la valeur en clair dans chaque
+tool.
+
 ### Tool 1 - disponibilites
 
 Nom : `get_madavoyage_availability`
+
+ID : `tool_1701ktykksp2e5bvvndqkpheccy9`
 
 Methode : `GET`
 
@@ -100,6 +115,8 @@ Quand l'utiliser :
 ### Tool 2 - reservation
 
 Nom : `create_madavoyage_reservation`
+
+ID : `tool_8001ktyknfbwetgtpcyx8g1pagfn`
 
 Methode : `POST`
 
@@ -119,6 +136,8 @@ Quand l'utiliser :
 
 Nom : `request_human_followup`
 
+ID : `tool_6401ktykngqqerytcgt803vmjb09`
+
 Methode : `POST`
 
 URL :
@@ -137,10 +156,6 @@ Quand l'utiliser :
 - demande explicite de parler a une personne.
 
 ## Widget
-
-Le composant est deja ajoute dans la page d'accueil.
-
-Il reste invisible tant que `NEXT_PUBLIC_ELEVENLABS_AGENT_ID` n'est pas defini.
 
 Apres creation ou modification de l'agent ElevenLabs :
 
